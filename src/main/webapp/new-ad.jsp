@@ -24,55 +24,55 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-brand" class="col-form-label">Brand</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="brand" type="text" id="txt-brand" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-model" class="col-form-label">Model</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="model" type="text" id="txt-model" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-yom" class="col-form-label">Year of Man.</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="yom" type="text" id="txt-yom" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-capacity" class="col-form-label">Engine Capacity</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="capacity" type="text" id="txt-capacity" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-fuel" class="col-form-label">Fuel Type</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="fuel" type="text" id="txt-fuel" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-condition" class="col-form-label">Condition</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="condition" type="text" id="txt-condition" class="form-control">
                                     </div>
                                 </div>
@@ -80,64 +80,62 @@
                             </div>
                             <div class="col-6">
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-mileage" class="col-form-label">Mileage</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="mileage" type="text" id="txt-mileage" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-contact" class="col-form-label">Contact No.</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="contact" type="text" id="txt-contact" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-location" class="col-form-label">Location</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="location" type="text" id="txt-location" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <label for="txt-district" class="col-form-label">District</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input name="district" type="text" id="txt-district" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-auto">
+                                    <div class="col-3">
                                         <label for="txt-price" class="col-form-label">Price</label>
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-9">
                                         <input name="price" type="text" id="txt-price" class="form-control">
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="row mt-3">
+
+                        <div class="row mt-5">
                             <div class="col-12">
-                                <div class="row mt-3 g-3 align-items-center">
-                                    <div class="col-2">
-                                        <label for="txt-description" class="col-form-label">Description</label>
-                                    </div>
-                                    <div class="col-10">
-                                        <textarea name="description" class="form-control" id="txt-description" rows="10"></textarea>
-                                    </div>
+                                <div class="mb-3">
+                                    <label for="img-images" class="form-label">Upload Images</label>
+                                    <input name="images" class="form-control" type="file" id="img-images" multiple>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <label for="txt-description" class="col-form-label">Description</label>
+                            </div>
+                            <div class="col-12">
+                                <textarea name="description" class="form-control" id="txt-description" rows="10"></textarea>
+                            </div>
+                        </div>
+
                         <div class="row mt-3">
                             <div class="col-12">
                                 <div class="d-flex gap-3">

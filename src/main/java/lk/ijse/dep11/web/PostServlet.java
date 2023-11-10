@@ -15,10 +15,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @WebServlet({"/","/add"})
 @MultipartConfig(location = "/tmp")
@@ -42,7 +39,6 @@ public class PostServlet extends HttpServlet {
                 String sellerContact = rstPost.getString("seller_contact");
                 String location = rstPost.getString("location");
                 String postedTimestamp = rstPost.getString("posted_timestamp");
-                String district = rstPost.getString("district");
                 BigDecimal price = rstPost.getBigDecimal("price");
 
                 imageStm.setInt(1, postId);
@@ -53,7 +49,7 @@ public class PostServlet extends HttpServlet {
                     imageList.add(rstImages.getString("image"));
                 }
 
-                postList.add(new Post(postId, vehicleId, condition, mileage, description, sellerContact, location, postedTimestamp, district, price, imageList));
+                postList.add(new Post(postId, vehicleId, condition, mileage, description, sellerContact, location, postedTimestamp, price, imageList));
             }
 
             Statement stmVehicle = connection.createStatement();
@@ -90,10 +86,12 @@ public class PostServlet extends HttpServlet {
         String mileage = req.getParameter("mileage");
         String contact = req.getParameter("contact");
         String location = req.getParameter("location");
-        String district = req.getParameter("district");
         String price = req.getParameter("price");
         String description = req.getParameter("description");
-//        Part picture = req.getPart("picture");
+        Collection<Part> images = req.getParts();
+//        Collection<Part> images = req.getParts();
+
+        
 
 //        if(picture.getSize() > 0) {
 //            String uploadDirPath = getServletContext().getRealPath("/uploads");
@@ -118,7 +116,7 @@ public class PostServlet extends HttpServlet {
                 ResultSet generatedKeys = stmVehicle.getGeneratedKeys();
 
                 generatedKeys.next();
-                PreparedStatement stmPost = connection.prepareStatement("INSERT INTO post (vehicle_id, `condition`, mileage, description, seller_contact, location, posted_timestamp, district, price) VALUES (?,?,?,?,?,?,?,?,?)");
+                PreparedStatement stmPost = connection.prepareStatement("INSERT INTO post (vehicle_id, `condition`, mileage, description, seller_contact, location, posted_timestamp, price) VALUES (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
                 stmPost.setInt(1, generatedKeys.getInt(1));
                 stmPost.setString(2, condition);
@@ -127,10 +125,11 @@ public class PostServlet extends HttpServlet {
                 stmPost.setString(5, contact);
                 stmPost.setString(6, location);
                 stmPost.setString(7, String.valueOf(LocalDateTime.now()));
-                stmPost.setString(8, district);
-                stmPost.setString(9, price);
+                stmPost.setString(8, price);
 
                 stmPost.executeUpdate();
+
+                ResultSet generatedKeysOfPost = stmPost.getGeneratedKeys();
 
 //                stmStudent.executeUpdate();
 
@@ -148,6 +147,36 @@ public class PostServlet extends HttpServlet {
 //
 //                    picture.write(picturePath);
 //                }
+
+                generatedKeysOfPost.next();
+
+                PreparedStatement stmImage = connection.prepareStatement("INSERT INTO post_image (image, post_id) VALUES (?, ?)");
+                List<String> imagePaths = new ArrayList<>();
+                String uploadDirPath = getServletContext().getRealPath("/uploads/");
+                for (Part image : images) {
+                    System.out.println(image.getName());
+                    if (!image.getName().equals("images")) {
+                        continue;
+                    }
+
+                    UUID imageId = UUID.randomUUID();
+                    String imagePath = uploadDirPath + imageId;
+                    imagePaths.add(imagePath);
+
+                    stmImage.setString(1, imagePath);
+                    stmImage.setInt(2, generatedKeysOfPost.getInt(1));
+
+                    stmImage.executeUpdate();
+                }
+
+                int i = 0;
+                for (Part image : images) {
+                    if (!image.getName().equals("images")) {
+                        continue;
+                    }
+                    image.write(imagePaths.get(i));
+                    i++;
+                }
                 connection.commit();
             } catch (Throwable t) {
                 connection.rollback();

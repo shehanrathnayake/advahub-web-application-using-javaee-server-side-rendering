@@ -19,7 +19,6 @@ public class Post implements Serializable {
     private String sellerContact;
     private String location;
     private String postedTimestamp;
-    private String district;
     private BigDecimal price;
     private List<String> imageList;
 }
